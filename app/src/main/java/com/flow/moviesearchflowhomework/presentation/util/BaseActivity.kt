@@ -11,15 +11,14 @@ abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInf
     AppCompatActivity() {
     constructor(
         inflate: (LayoutInflater) -> T,
-        transitionMode: TransitionMode = TransitionMode.NONE
+        transitionMode: TransitionMode = TransitionMode.NONE                                  // 선택적 animation 적용
     ) : this(inflate) {
         this.transitionMode = transitionMode
     }
 
     private lateinit var transitionMode: TransitionMode
     private val _binding: T? by lazy { inflate.invoke(layoutInflater) }
-    protected val binding get() = _binding ?: throw  NullPointerException("Binding Is Null")
-
+    protected val binding get() = _binding ?: throw  NullPointerException("Binding Is Null")  //상속 받고 있는 Activity에서만 사용, (activity as XXXActivity) 로는 접근 불가
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
