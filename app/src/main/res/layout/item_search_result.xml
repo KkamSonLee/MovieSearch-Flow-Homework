@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="com.flow.moviesearchflowhomework.presentation.util.ViewExtensionKt"/>
 
         <variable
             name="searchList"
@@ -30,6 +31,8 @@
             android:id="@+id/tv_title"
             style="@style/TextView.Noto.B12.Style"
             android:layout_width="0dp"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/app_space_16dp"
             android:text="@{@string/title_combine_text(searchList.title, searchList.director)}"
@@ -42,7 +45,7 @@
             android:id="@+id/tv_pub_date"
             style="@style/TextView.Noto.M12.Style"
             android:layout_width="0dp"
-            android:text="@{searchList.pubDate}"
+            android:text="@{@string/pub_date(searchList.pubDate)}"
             android:layout_height="wrap_content"
             android:textColor="@color/grey2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +58,7 @@
             style="@style/TextView.Noto.M12.Style"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{searchList.userRating}"
+            android:text="@{@string/user_rating(searchList.userRating)}"
             android:textColor="@color/grey2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

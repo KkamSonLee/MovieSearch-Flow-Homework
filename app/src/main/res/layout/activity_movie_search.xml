@@ -8,6 +8,16 @@
         android:layout_height="match_parent"
         tools:context=".presentation.MovieSearchActivity">
 
+        <ProgressBar
+            android:id="@+id/pb_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_view_recent_search"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search" />
+
         <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="wrap_content"
@@ -64,5 +74,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             tools:listitem="@layout/item_search_result" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="rv_search_list, et_search, tv_view_recent_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

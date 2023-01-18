@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.flow.moviesearchflowhomework.BR
 import com.flow.moviesearchflowhomework.databinding.ItemSearchResultBinding
 import com.flow.moviesearchflowhomework.domain.entity.SearchItem
+import com.flow.moviesearchflowhomework.presentation.util.showToast
 
-class RemoteSearchListAdapter(val listener: (SearchItem) -> Unit) :
+class RemoteSearchListAdapter(private val movieClickListener: (SearchItem) -> Unit) :
     ListAdapter<SearchItem, RemoteSearchListAdapter.SearchViewHolder>(
         object : DiffUtil.ItemCallback<SearchItem>() {
             override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean =
@@ -20,7 +21,7 @@ class RemoteSearchListAdapter(val listener: (SearchItem) -> Unit) :
         }
     ) {
     private lateinit var inflater: LayoutInflater
-
+    var isClickable = true
 
     class SearchViewHolder(val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -36,7 +37,10 @@ class RemoteSearchListAdapter(val listener: (SearchItem) -> Unit) :
         val data = getItem(position)
         holder.binding.setVariable(BR.searchList, data)
         holder.binding.root.setOnClickListener {
-            listener(data)
+            if (isClickable) {
+                holder.binding.root.context.showToast("HIHIHIHIHIHIHIHHIHI")
+                movieClickListener(data)
+            }
         }
     }
 }
