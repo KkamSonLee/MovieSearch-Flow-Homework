@@ -1,17 +1,16 @@
 package com.flow.moviesearchflowhomework.presentation.util
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.flow.moviesearchflowhomework.R
 
-abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInflater) -> T) :  // or Layout ID
+abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInflater) -> T):  // or Layout ID
     AppCompatActivity() {
     constructor(
         inflate: (LayoutInflater) -> T,
-        transitionMode: TransitionMode = TransitionMode.NONE                                  // 선택적 animation 적용
+        transitionMode: TransitionMode              // 선택적 animation 적용
     ) : this(inflate) {
         this.transitionMode = transitionMode
     }
