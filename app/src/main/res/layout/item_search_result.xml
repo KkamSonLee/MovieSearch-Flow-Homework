@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="searchList"
+            type="com.flow.moviesearchflowhomework.domain.entity.SearchItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/app_space_16dp">
+
+        <ImageView
+            android:id="@+id/iv_thumb"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadRemoteRoundedImage="@{searchList.image}"
+            tools:src="@drawable/placeholder" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/TextView.Noto.B12.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_space_16dp"
+            android:text="@{@string/title_combine_text(searchList.title, searchList.director)}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_thumb"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="아이(i) - 김현탁" />
+
+        <TextView
+            android:id="@+id/tv_pub_date"
+            style="@style/TextView.Noto.M12.Style"
+            android:layout_width="0dp"
+            android:text="@{searchList.pubDate}"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            tools:text="출시 : 2021" />
+
+        <TextView
+            android:id="@+id/tv_rating"
+            style="@style/TextView.Noto.M12.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{searchList.userRating}"
+            android:textColor="@color/grey2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title"
+            tools:text="평점 : 9.13" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
