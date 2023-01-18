@@ -16,12 +16,14 @@ abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInf
         this.transitionMode = transitionMode
     }
 
-    private lateinit var transitionMode: TransitionMode
+    private var transitionMode: TransitionMode = TransitionMode.NONE
     private val _binding: T? by lazy { inflate.invoke(layoutInflater) }
-    protected val binding get() = _binding ?: throw  NullPointerException("Binding Is Null")  //상속 받고 있는 Activity에서만 사용, (activity as XXXActivity) 로는 접근 불가
+    protected val binding
+        get() = _binding
+            ?: throw  NullPointerException("Binding Is Null")  //상속 받고 있는 Activity에서만 사용, (activity as XXXActivity) 로는 접근 불가
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         setContentView(binding.root)
         when (transitionMode) {
             TransitionMode.HORIZONTAL -> overridePendingTransition(

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MovieSearchFlowHomework</string>
+    <string name="search_hint">검색할 영화를 입력해주세요.</string>
+    <string name="title_combine_text">%s - %s</string>
 </resources>
