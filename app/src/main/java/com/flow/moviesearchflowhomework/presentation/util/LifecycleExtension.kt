@@ -13,7 +13,8 @@ inline fun <T, R> R.collectFlowWhenStarted(
 ) = collectFlow(flow, block) // Lifecycle.State.STARTED는 Default로 들어감
 
 inline fun <T, R> R.collectFlow(
-    flow: Flow<T>, crossinline block: suspend (T) -> Unit   // 비지역 반환 해결, inline func + 람다 사용시 cross-inline 사용
+    flow: Flow<T>,
+    crossinline block: suspend (T) -> Unit   // 비지역 반환 해결, inline func + 람다 사용시 cross-inline 사용
 ) {
     when (this) {
         is AppCompatActivity -> flow.flowWithLifecycle(lifecycle).onEach { block(it) }
