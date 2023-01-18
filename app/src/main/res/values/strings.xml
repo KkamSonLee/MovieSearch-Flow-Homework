@@ -2,4 +2,6 @@
     <string name="app_name">MovieSearchFlowHomework</string>
     <string name="search_hint">검색할 영화를 입력해주세요.</string>
     <string name="title_combine_text">%s - %s</string>
+    <string name="pub_date">출시 : %s</string>
+    <string name="user_rating">평점 : %s</string>
 </resources>

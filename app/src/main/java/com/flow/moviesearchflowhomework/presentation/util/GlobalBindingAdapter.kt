@@ -6,10 +6,14 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.flow.moviesearchflowhomework.R
 
-
 @BindingAdapter("app:loadRemoteRoundedImage")
-fun ImageView.loadRemoteRoundedImage(url: String?) {
-    if (url == null) return
+fun ImageView.loadRemoteRoundedImage(url: String) {
+    if (url.isBlank()) {            //Image가 없는 것이 올 때는 placeholder 띄움
+        load(R.drawable.placeholder) {
+            transformations(RoundedCornersTransformation(12F))
+        }
+        return
+    }
     load(url) {
         crossfade(true)
         transformations(RoundedCornersTransformation(12F))
