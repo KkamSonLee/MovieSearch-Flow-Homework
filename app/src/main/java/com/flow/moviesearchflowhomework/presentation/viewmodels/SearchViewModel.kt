@@ -23,6 +23,12 @@ class SearchViewModel @Inject constructor(private val homeRepository: HomeReposi
         viewModelScope.launch {
             _searchData.value =
                 UiState.Success(homeRepository.fetchMovie(keyword = keyword, 10, 1) ?: listOf())
+            homeRepository.insertRecentSearch(
+                RecentSearchKeywordEntity(
+                    keyword,
+                    LocalDateTime.now()
+                )
+            )
         }
     }
 }
