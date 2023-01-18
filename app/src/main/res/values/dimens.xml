@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="corner_radius_12">12dp</dimen>
+    <dimen name="app_bar_space">72dp</dimen>
+    <dimen name="app_space_24dp">24dp</dimen>
+    <dimen name="app_space_16dp">16dp</dimen>
     <dimen name="app_space_12dp">12dp</dimen>
+    <dimen name="app_space_10dp">10dp</dimen>
     <dimen name="app_space_9dp">9dp</dimen>
     <dimen name="app_space_8dp">8dp</dimen>
     <dimen name="app_space_6dp">6dp</dimen>
-    <dimen name="app_space_24dp">24dp</dimen>
-    <dimen name="app_space_16dp">16dp</dimen>
 </resources>

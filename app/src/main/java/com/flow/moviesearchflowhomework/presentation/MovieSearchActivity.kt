@@ -1,6 +1,9 @@
 package com.flow.moviesearchflowhomework.presentation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import com.flow.moviesearchflowhomework.databinding.ActivityMovieSearchBinding
@@ -54,7 +57,12 @@ class MovieSearchActivity :
     }
 
     private fun setAdapter() {
-        searchAdapter = RemoteSearchListAdapter { }
+        searchAdapter = RemoteSearchListAdapter { item ->
+            Intent(this, SearchDetailActivity::class.java).apply {
+                putExtra(LINK_NAME, item.link)
+                startActivity(this)
+            }
+        }
         binding.rvSearchList.adapter = searchAdapter
     }
 
@@ -68,5 +76,9 @@ class MovieSearchActivity :
             }
             false
         }
+    }
+
+    companion object {
+        const val LINK_NAME = "link"
     }
 }
