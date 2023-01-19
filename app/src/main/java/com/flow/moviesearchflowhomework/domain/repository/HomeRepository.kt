@@ -7,4 +7,5 @@ interface HomeRepository {
     suspend fun fetchMovie(keyword: String, display: Int, start: Int): List<SearchItem>?
     suspend fun fetchRecentSearch(): List<RecentSearchKeywordEntity>
     suspend fun insertRecentSearch(recentSearchKeywordEntity: RecentSearchKeywordEntity)
+    suspend fun deleteRecentSearch(recentSearchKeywordEntity: RecentSearchKeywordEntity)
 }

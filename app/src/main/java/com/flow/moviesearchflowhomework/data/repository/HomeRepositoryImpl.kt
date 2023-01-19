@@ -29,4 +29,8 @@ class HomeRepositoryImpl @Inject constructor(
             localRecentSearchDataSource.deleteRecentSearch(currentList[10])
         }
     }
+
+    override suspend fun deleteRecentSearch(recentSearchKeywordEntity: RecentSearchKeywordEntity) {
+        localRecentSearchDataSource.deleteRecentSearch(recentSearchKeywordEntity)
+    }
 }
