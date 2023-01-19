@@ -17,6 +17,7 @@ fun Context.showToast(msg: String) {
     val toast = Toast.makeText(this, msg, Toast.LENGTH_SHORT)
     toast.show()
 }
+
 fun View.hideKeyboard(): Boolean {
     try {
         val inputMethodManager =
@@ -25,4 +26,8 @@ fun View.hideKeyboard(): Boolean {
     } catch (ignored: RuntimeException) {
     }
     return false
+}
+
+fun View.setOnSingleClickListener(onSingleClick: (View) -> Unit) {
+    setOnClickListener(SingleClickListener { onSingleClick(it) })
 }
