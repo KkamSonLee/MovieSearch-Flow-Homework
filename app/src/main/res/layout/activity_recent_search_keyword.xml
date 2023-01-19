@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="recentViewModel"
+            type="com.flow.moviesearchflowhomework.presentation.viewmodels.RecentSearchKeywordViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,15 +22,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_test"
+        <ProgressBar
+            android:id="@+id/pb_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HI"
-            android:textSize="50dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/recent_appbar" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_recent_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:paddingBottom="@dimen/app_space_24dp"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/app_space_16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recent_appbar"
+            tools:listitem="@layout/item_recent_keyword" />
+
+        <TextView
+            android:id="@+id/tv_empty"
+            style="@style/TextView.Noto.B20.Style"
+            android:layout_width="wrap_content"
+            android:textColor="@color/grey2"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/empty_string"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recent_appbar" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

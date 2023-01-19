@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="recentItem"
+            type="com.flow.moviesearchflowhomework.domain.entity.RecentSearchKeywordEntity" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/app_space_20dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_movie_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_keyword"
+            style="@style/TextView.Noto.B12.Style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/app_space_15dp"
+            android:layout_marginEnd="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{recentItem.keyword}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_create_at"
+            app:layout_constraintStart_toEndOf="@+id/iv_search"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="TEST LONG TEXT TEST LONG TEXT TEST LONG TEXT TEST LONG TEXT" />
+
+        <TextView
+            android:id="@+id/tv_create_at"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{recentItem.createAt.toLocalDate().toString()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_keyword_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="01. 19." />
+
+        <ImageView
+            android:id="@+id/iv_keyword_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
