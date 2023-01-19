@@ -9,4 +9,6 @@
     <dimen name="app_space_9dp">9dp</dimen>
     <dimen name="app_space_8dp">8dp</dimen>
     <dimen name="app_space_6dp">6dp</dimen>
+    <dimen name="app_space_15dp">15dp</dimen>
+    <dimen name="app_space_20dp">20dp</dimen>
 </resources>

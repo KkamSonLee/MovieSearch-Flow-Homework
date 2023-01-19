@@ -34,6 +34,11 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="TextView.Noto.M10.Style" parent="">
+        <item name="android:textAppearance">@style/TextView.Noto.M10.TextAppearance</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="TextView.Noto.B20.TextAppearance" parent="">
         <item name="android:fontFamily">@font/notosans_bold</item>
         <item name="android:textSize">20dp</item>
@@ -52,6 +57,11 @@
     <style name="TextView.Noto.M12.TextAppearance" parent="">
         <item name="android:fontFamily">@font/notosans_medium</item>
         <item name="android:textSize">12dp</item>
+    </style>
+
+    <style name="TextView.Noto.M10.TextAppearance" parent="">
+        <item name="android:fontFamily">@font/notosans_medium</item>
+        <item name="android:textSize">10dp</item>
     </style>
 
 </resources>
