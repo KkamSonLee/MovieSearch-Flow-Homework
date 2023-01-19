@@ -19,6 +19,17 @@ class MovieSearchActivity :
     BaseActivity<ActivityMovieSearchBinding>(ActivityMovieSearchBinding::inflate) {
     private lateinit var searchAdapter: RemoteSearchListAdapter
     private val searchViewModel by viewModels<SearchViewModel>()
+    private val getResultText: ActivityResultLauncher<Intent> =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            Log.e("RESULT!!@@!", result.toString())
+            if (result.resultCode == RESULT_OK) {
+                val data = result.data?.getStringExtra(SEARCH_KEYWORD).toString()
+                Log.e("RESULT!!", data)
+                searchViewModel.inputSearchText.value = data
+                searchViewModel.callSearch(data)
+            }
+        }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
@@ -73,7 +84,7 @@ class MovieSearchActivity :
 
     private fun applyListener() {
         binding.tvViewRecentSearch.setOnClickListener {
-            showToast("Hi Touch")
+            getResultText.launch(Intent(this, RecentSearchKeywordActivity::class.java))
         }
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -85,5 +96,6 @@ class MovieSearchActivity :
 
     companion object {
         const val LINK_NAME = "link"
+        const val SEARCH_KEYWORD = "searchKeyword"
     }
 }

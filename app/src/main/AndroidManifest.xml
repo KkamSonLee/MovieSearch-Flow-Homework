@@ -18,9 +18,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.RecentSearchKeywordActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.SearchDetailActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".presentation.MovieSearchActivity"
             android:exported="true">
