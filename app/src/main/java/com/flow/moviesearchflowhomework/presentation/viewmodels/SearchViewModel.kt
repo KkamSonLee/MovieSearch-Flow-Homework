@@ -18,6 +18,8 @@ class SearchViewModel @Inject constructor(private val homeRepository: HomeReposi
     ViewModel() {
     private val _searchData = MutableStateFlow<UiState<List<SearchItem>>>(UiState.Init)
     val searchData get() = _searchData.asStateFlow()
+    val inputSearchText = MutableStateFlow<String>("")
+
     fun callSearch(keyword: String) {
         _searchData.value = UiState.Loading
         viewModelScope.launch {

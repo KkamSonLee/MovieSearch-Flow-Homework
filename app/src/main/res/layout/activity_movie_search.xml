@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="searchViewModel"
+            type="com.flow.moviesearchflowhomework.presentation.viewmodels.SearchViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -46,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/app_space_12dp"
             android:layout_marginTop="@dimen/app_space_12dp"
+            android:text="@={searchViewModel.inputSearchText}"
             android:background="@drawable/shape_rectangle_grey_12dp"
             android:drawableStart="@drawable/ic_movie_search"
             android:drawablePadding="@dimen/app_space_6dp"

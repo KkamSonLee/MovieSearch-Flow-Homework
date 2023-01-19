@@ -1,10 +1,11 @@
 package com.flow.moviesearchflowhomework.presentation
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.flow.moviesearchflowhomework.databinding.ActivityMovieSearchBinding
 import com.flow.moviesearchflowhomework.domain.entity.SearchItem
@@ -21,6 +22,7 @@ class MovieSearchActivity :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
+        binding.searchViewModel = searchViewModel
         setAdapter()
         applyListener()
         collectSearchData()
@@ -40,6 +42,9 @@ class MovieSearchActivity :
                     showToast("Something to wrong")
                 }
             }
+        }
+        collectFlowWhenStarted(searchViewModel.inputSearchText) {
+            Log.e("Collect", it)
         }
     }
 
@@ -70,9 +75,9 @@ class MovieSearchActivity :
         binding.tvViewRecentSearch.setOnClickListener {
             showToast("Hi Touch")
         }
-        binding.etSearch.setOnEditorActionListener { edit, actionId, _ ->
+        binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                searchViewModel.callSearch(edit.text.toString())
+                searchViewModel.callSearch(searchViewModel.inputSearchText.value)
             }
             false
         }
