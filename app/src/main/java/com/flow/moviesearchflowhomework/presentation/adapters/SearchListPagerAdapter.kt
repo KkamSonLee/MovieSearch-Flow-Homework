@@ -10,8 +10,8 @@ import com.flow.moviesearchflowhomework.databinding.ItemSearchResultBinding
 import com.flow.moviesearchflowhomework.domain.entity.SearchItem
 import com.flow.moviesearchflowhomework.presentation.util.showToast
 
-class RemoteSearchListAdapter(private val movieClickListener: (SearchItem) -> Unit) :
-    ListAdapter<SearchItem, RemoteSearchListAdapter.SearchViewHolder>(
+class SearchListPagerAdapter(private val movieClickListener: (SearchItem) -> Unit) :
+    ListAdapter<SearchItem, SearchListPagerAdapter.SearchViewHolder>(
         object : DiffUtil.ItemCallback<SearchItem>() {
             override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean =
                 oldItem.link == newItem.link

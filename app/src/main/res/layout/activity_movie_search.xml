@@ -81,10 +81,17 @@
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             tools:listitem="@layout/item_search_result" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/group_container"
+        <TextView
+            android:id="@+id/tv_empty"
+            style="@style/TextView.Noto.B20.Style"
             android:layout_width="wrap_content"
+            android:textColor="@color/grey2"
+            android:visibility="gone"
             android:layout_height="wrap_content"
-            app:constraint_referenced_ids="rv_search_list, et_search, tv_view_recent_search" />
+            android:text="@string/empty_string"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

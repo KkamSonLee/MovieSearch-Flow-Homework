@@ -9,7 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.flow.moviesearchflowhomework.databinding.ActivityMovieSearchBinding
 import com.flow.moviesearchflowhomework.domain.entity.SearchItem
-import com.flow.moviesearchflowhomework.presentation.adapters.RemoteSearchListAdapter
+import com.flow.moviesearchflowhomework.presentation.adapters.SearchListPagerAdapter
 import com.flow.moviesearchflowhomework.presentation.util.*
 import com.flow.moviesearchflowhomework.presentation.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MovieSearchActivity :
     BaseActivity<ActivityMovieSearchBinding>(ActivityMovieSearchBinding::inflate) {
-    private lateinit var searchAdapter: RemoteSearchListAdapter
+    private lateinit var searchAdapter: SearchListPagerAdapter
     private val searchViewModel by viewModels<SearchViewModel>()
     private val getResultText: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -64,6 +64,11 @@ class MovieSearchActivity :
         binding.tvViewRecentSearch.isClickable = true
         searchAdapter.isClickable = true
         searchAdapter.submitList(searchItems.data)
+        if (searchItems.data.isEmpty()) {
+            binding.tvEmpty.setVisible()
+        } else {
+            binding.tvEmpty.setGone()
+        }
     }
 
     private fun onLoad() {
@@ -73,7 +78,7 @@ class MovieSearchActivity :
     }
 
     private fun setAdapter() {
-        searchAdapter = RemoteSearchListAdapter { item ->
+        searchAdapter = SearchListPagerAdapter { item ->
             Intent(this, SearchDetailActivity::class.java).apply {
                 putExtra(LINK_NAME, item.link)
                 startActivity(this)
