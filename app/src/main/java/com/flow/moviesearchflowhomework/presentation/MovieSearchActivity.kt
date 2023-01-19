@@ -2,17 +2,20 @@ package com.flow.moviesearchflowhomework.presentation
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.inputmethod.EditorInfo
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.flow.moviesearchflowhomework.databinding.ActivityMovieSearchBinding
-import com.flow.moviesearchflowhomework.domain.entity.SearchItem
 import com.flow.moviesearchflowhomework.presentation.adapters.SearchListPagerAdapter
-import com.flow.moviesearchflowhomework.presentation.util.*
+import com.flow.moviesearchflowhomework.presentation.util.BaseActivity
+import com.flow.moviesearchflowhomework.presentation.util.collectFlowWhenStarted
 import com.flow.moviesearchflowhomework.presentation.viewmodels.SearchViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieSearchActivity :
@@ -21,12 +24,10 @@ class MovieSearchActivity :
     private val searchViewModel by viewModels<SearchViewModel>()
     private val getResultText: ActivityResultLauncher<Intent> =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            Log.e("RESULT!!@@!", result.toString())
             if (result.resultCode == RESULT_OK) {
                 val data = result.data?.getStringExtra(SEARCH_KEYWORD).toString()
-                Log.e("RESULT!!", data)
                 searchViewModel.inputSearchText.value = data
-                searchViewModel.callSearch(data)
+                callSearch(data)
             }
         }
 
@@ -34,48 +35,38 @@ class MovieSearchActivity :
         super.onCreate(savedInstanceState)
         binding.lifecycleOwner = this
         binding.searchViewModel = searchViewModel
+
         setAdapter()
         applyListener()
-        collectSearchData()
     }
 
-    private fun collectSearchData() {
-        collectFlowWhenStarted(searchViewModel.searchData) { searchItems ->
-            when (searchItems) {
-                is UiState.Init -> {}
-                is UiState.Success -> {
-                    onSuccess(searchItems)
-                }
-                is UiState.Loading -> {
-                    onLoad()
-                }
-                is UiState.Error -> {
-                    showToast("Something to wrong")
-                }
-            }
+    private fun callSearch(keyword: String) {
+        lifecycleScope.launch {
+            searchViewModel.onQueryChanged(keyword)
         }
-        collectFlowWhenStarted(searchViewModel.inputSearchText) {
-            Log.e("Collect", it)
+        collectFlowWhenStarted(searchViewModel.initSearchCollect()) { paging ->
+            searchAdapter.submitData(paging)
+        }
+        collectFlowWhenStarted(searchAdapter.loadStateFlow) { state ->
+            binding.pbProgress.isVisible = state.refresh is LoadState.Loading
         }
     }
+/*
 
-    private fun onSuccess(searchItems: UiState.Success<List<SearchItem>>) {
+    private fun onSuccess() {
+        Log.e("ON onSuccess", "onSuccess()")
         binding.pbProgress.setGone()
         binding.tvViewRecentSearch.isClickable = true
         searchAdapter.isClickable = true
-        searchAdapter.submitList(searchItems.data)
-        if (searchItems.data.isEmpty()) {
-            binding.tvEmpty.setVisible()
-        } else {
-            binding.tvEmpty.setGone()
-        }
     }
 
     private fun onLoad() {
+        Log.e("ON LOAD", "onLoad()")
         binding.pbProgress.setVisible()
         binding.tvViewRecentSearch.isClickable = false
         searchAdapter.isClickable = false
     }
+*/
 
     private fun setAdapter() {
         searchAdapter = SearchListPagerAdapter { item ->
@@ -93,7 +84,7 @@ class MovieSearchActivity :
         }
         binding.etSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                searchViewModel.callSearch(searchViewModel.inputSearchText.value)
+                callSearch(searchViewModel.inputSearchText.value)
             }
             false
         }
