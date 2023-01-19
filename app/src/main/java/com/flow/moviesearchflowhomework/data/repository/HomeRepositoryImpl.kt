@@ -18,10 +18,14 @@ class HomeRepositoryImpl @Inject constructor(
     private val localRecentSearchDataSource: LocalRecentSearchDataSource,
     private val searchItemMapper: SearchItemMapper
 ) : HomeRepository {
-    override suspend fun fetchMovie(keyword: String, display: Int, start: Int): List<SearchItem>? =
-        remoteSearchDatasource.fetchSearchMovie(keyword, display, start)?.let {
-            searchItemMapper.map(it)
-        }
+    override fun fetchMovie(
+        keyword: String
+    ): Flow<PagingData<SearchItem>> =
+        Pager(
+            config = PagingConfig(
+                pageSize = 30
+            ), pagingSourceFactory = { SearchPagingSource(naverService, keyword, searchItemMapper) }
+        ).flow
 
     override suspend fun fetchRecentSearch(): List<RecentSearchKeywordEntity> =
         localRecentSearchDataSource.getAllRecentKeyword()
