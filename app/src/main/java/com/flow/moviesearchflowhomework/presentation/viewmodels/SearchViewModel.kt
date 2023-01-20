@@ -18,38 +18,24 @@ import javax.inject.Inject
 class SearchViewModel @Inject constructor(private val homeRepository: HomeRepository) :
     ViewModel() {
     val inputSearchText = MutableStateFlow<String>("")
-    private val queryFlow: MutableSharedFlow<String> =
-        MutableSharedFlow(1) //default 0이면 초기 데이터 안 불러와짐
 
-    fun onQueryChanged(query: String) {
-        if (query.isNotBlank()) {
+    fun initSearchCollect(keyword: String): Flow<PagingData<SearchItem>> {
+        if (keyword.isNotBlank()) {
             viewModelScope.launch {
-                queryFlow.emit(query)
-            }
-            Log.e("onQueryChanged", "Inner onQueryChanged $query")
-        }
-    }
-
-    fun initSearchCollect(): Flow<PagingData<SearchItem>> {
-
-        Log.e("onQueryChanged", "initSearchCollect()")
-        val querySearchResults = queryFlow.asSharedFlow().flatMapLatest { query ->
-            Log.e("asSharedFlow()", "flatMapLatest()")
-            if (query.isNotBlank()) {
                 homeRepository.insertRecentSearch(
                     RecentSearchKeywordEntity(
-                        query,
+                        keyword,
                         LocalDateTime.now()
                     )
                 )
             }
-            homeRepository.fetchMovie(keyword = query).cachedIn(viewModelScope)
         }
-        return querySearchResults
+        return homeRepository.fetchMovie(keyword = keyword).cachedIn(viewModelScope)
     }
 
     override fun onCleared() {
         super.onCleared()
         Log.e("VIEWMODEL", "onCleared")
     }
+
 }

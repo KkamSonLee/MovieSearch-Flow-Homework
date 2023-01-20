@@ -11,6 +11,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {
+
     @Binds
     @Singleton
     abstract fun bindLocalSearchDataSource(localRecentSearchDataSource: LocalRecentSearchDataSourceImpl): LocalRecentSearchDataSource

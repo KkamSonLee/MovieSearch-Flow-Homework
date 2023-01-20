@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.flow.moviesearchflowhomework.BR
 import com.flow.moviesearchflowhomework.databinding.ItemSearchResultBinding
 import com.flow.moviesearchflowhomework.domain.entity.SearchItem
-import com.flow.moviesearchflowhomework.presentation.util.showToast
 
 class SearchListPagerAdapter(private val movieClickListener: (SearchItem) -> Unit) :
-    PagingDataAdapter<SearchItem, SearchListPagerAdapter.SearchViewHolder>(
+    PagingDataAdapter<SearchItem, SearchListPagerAdapter.SearchViewHolder>(  //PagingDataAdapter
         object : DiffUtil.ItemCallback<SearchItem>() {
             override fun areItemsTheSame(oldItem: SearchItem, newItem: SearchItem): Boolean =
                 oldItem.link == newItem.link
@@ -21,7 +20,6 @@ class SearchListPagerAdapter(private val movieClickListener: (SearchItem) -> Uni
         }
     ) {
     private lateinit var inflater: LayoutInflater
-    var isClickable = true
 
     class SearchViewHolder(val binding: ItemSearchResultBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -35,13 +33,10 @@ class SearchListPagerAdapter(private val movieClickListener: (SearchItem) -> Uni
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val data = getItem(position)
-        if (data != null) {  //nullable로 바뀜
+        if (data != null) {  //Paging Adapter 사용시 nullable로 바뀜
             holder.binding.setVariable(BR.searchList, data)
             holder.binding.root.setOnClickListener {
-                if (isClickable) {
-                    holder.binding.root.context.showToast("HIHIHIHIHIHIHIHHIHI")
-                    movieClickListener(data)
-                }
+                movieClickListener(data)
             }
         }
     }

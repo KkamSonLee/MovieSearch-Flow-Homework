@@ -8,7 +8,7 @@ import com.flow.moviesearchflowhomework.R
 
 abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInflater) -> T):  // or Layout ID
     AppCompatActivity() {
-    constructor(
+    constructor(                                    //기본 생성자 파라미터, 하나는 default value를 넣어도 선택적으로 파라미터를 보낼 수가 없음 (@AndroidEntryPoint 때문일 가능성이 높지만 현재는 해당 방법으로 메소드 오버로딩 사용)
         inflate: (LayoutInflater) -> T,
         transitionMode: TransitionMode              // 선택적 animation 적용
     ) : this(inflate) {
@@ -26,8 +26,8 @@ abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInf
         setContentView(binding.root)
         when (transitionMode) {
             TransitionMode.HORIZONTAL -> overridePendingTransition(
-                R.anim.horizontal_enter,
-                R.anim.none
+                R.anim.horizontal_enter,  //해당 액티비티를 상속하고 현재 들어오는 액티비티
+                R.anim.none   //이전 액티비티
             )
             else -> Unit
         }

@@ -49,7 +49,7 @@ class RecentSearchKeywordActivity :
         }
     }
 
-    private fun onSuccess(recentSearchItem: UiState.Success<List<RecentSearchKeywordEntity>>) {
+    private fun onSuccess(recentSearchItem: UiState.Success<List<RecentSearchKeywordEntity>>) {   //Progress Gone, List Submit
         binding.pbProgress.setGone()
         if (recentSearchItem.data.isEmpty()) {
             binding.tvEmpty.setVisible()
@@ -59,30 +59,30 @@ class RecentSearchKeywordActivity :
         recentSearchAdapter.submitList(recentSearchItem.data)
     }
 
-    private fun onLoad() {
+    private fun onLoad() {  //Progress visible
         binding.pbProgress.setVisible()
     }
 
     private fun setAdapter() {
         recentSearchAdapter =
             RecentSearchListAdapter(
-                recentKeywordClickListener = { keywordEntity ->
+                recentKeywordClickListener = { keywordEntity ->     //Move to SearchActivity
                     backToSearch(keywordEntity.keyword)
-                }, deleteKeywordClickListener = { keywordEntity ->
+                }, deleteKeywordClickListener = { keywordEntity ->  //delete 1 Item
                     deleteKeyword(keywordEntity)
                 })
         binding.rvRecentList.adapter = recentSearchAdapter
     }
 
-    private fun backToSearch(keyword: String) {
+    private fun backToSearch(keyword: String) {         //Return to getResultText(Search Activity)
         val intent = Intent(this, MovieSearchActivity::class.java).apply {
-            putExtra("searchKeyword", keyword)
+            putExtra("searchKeyword", keyword)    //Search Keyword
         }
         setResult(RESULT_OK, intent)
         finish()
     }
 
-    private fun deleteKeyword(keywordEntity: RecentSearchKeywordEntity) {
+    private fun deleteKeyword(keywordEntity: RecentSearchKeywordEntity) {  //remove call dao
         recentSearchKeywordViewModel.deleteRecentKeyword(keywordEntity)
     }
 }

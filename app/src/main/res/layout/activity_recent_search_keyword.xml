@@ -17,6 +17,7 @@
 
         <include
             android:id="@+id/recent_appbar"
+            app:title="@{`최근검색어`}"
             layout="@layout/appbar_back_header"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -18,8 +18,7 @@ class SearchDetailActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        clickListener()
+        setListener()
 
         with(binding.webview) {
             webViewClient = WebViewClient()
@@ -27,23 +26,15 @@ class SearchDetailActivity :
             with(settings) {
                 loadsImagesAutomatically = true // 이미지 자동 로드
                 javaScriptEnabled = true
-                // 웹페이지 내부가 javaScript를 통한
-                //동작 동적이 있음 따라서 ture로 설정
-                allowContentAccess = true
-                // content URI 사용을 위함
-                mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
-                // 쿠팡링크등 Dynamic link 허용을 위함
-                cacheMode = WebSettings.LOAD_DEFAULT
             }
             val link = intent.getStringExtra("link")
             link?.let { loadUrl(it) }
         }
     }
 
-    private fun clickListener() {
+    private fun setListener() {
         binding.include.appbar.setNavigationOnClickListener {
             finish()
         }
     }
-
 }

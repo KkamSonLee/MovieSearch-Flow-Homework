@@ -14,7 +14,7 @@ suspend inline fun <T> catchingApiCall(crossinline apiCall: suspend () -> Respon
                 Log.e("IOException", throwable.message.toString())
                 null
             }
-            is HttpException -> {       //error 코드까지는 내려옴, end point까지는 접근
+            is HttpException -> {       //error 코드까지는 내려옴, end point 까지는 접근
                 Log.e("HttpException", throwable.message.toString())
                 null
             }

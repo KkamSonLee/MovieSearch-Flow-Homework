@@ -80,18 +80,5 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             tools:listitem="@layout/item_search_result" />
-
-        <TextView
-            android:id="@+id/tv_empty"
-            style="@style/TextView.Noto.B20.Style"
-            android:layout_width="wrap_content"
-            android:textColor="@color/grey2"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            android:text="@string/empty_string"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

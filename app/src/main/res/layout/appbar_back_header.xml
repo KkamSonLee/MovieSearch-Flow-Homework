@@ -1,15 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/appbar"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/app_bar_space"
-    android:background="@color/white"
-    android:elevation="@dimen/app_space_10dp"
-    app:buttonGravity="center_vertical"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:navigationIcon="@drawable/ic_back" />
+<layout>
 
+    <data>
+
+        <variable
+            name="title"
+            type="String" />
+    </data>
+
+    <com.google.android.material.appbar.MaterialToolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_space"
+        android:background="@color/white"
+        android:elevation="@dimen/app_space_10dp"
+        app:titleTextAppearance="@style/TextView.Noto.B20.TextAppearance"
+        app:buttonGravity="center_vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_back"
+        app:title="@{title}"
+        app:titleCentered="true" />
+
+</layout>

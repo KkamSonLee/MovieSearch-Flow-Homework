@@ -34,7 +34,7 @@ class HomeRepositoryImpl @Inject constructor(
         localRecentSearchDataSource.insertRecentKeyword(recentSearchKeywordEntity)
         val currentList = localRecentSearchDataSource.getAllRecentKeyword()
         if (currentList.size > 10) {
-            localRecentSearchDataSource.deleteRecentSearch(currentList[10])
+            localRecentSearchDataSource.deleteRecentSearch(currentList[10])   // LRU 기법처럼 가장 뒤에 있는 데이터부터 제거
         }
     }
 

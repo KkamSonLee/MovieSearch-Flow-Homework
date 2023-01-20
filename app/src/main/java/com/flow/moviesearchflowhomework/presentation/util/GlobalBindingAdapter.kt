@@ -14,7 +14,7 @@ fun ImageView.loadRemoteRoundedImage(url: String) {
         }
         return
     }
-    load(url) {
+    load(url) {  //Use Coil
         crossfade(true)
         transformations(RoundedCornersTransformation(12F))
         placeholder(R.drawable.placeholder)

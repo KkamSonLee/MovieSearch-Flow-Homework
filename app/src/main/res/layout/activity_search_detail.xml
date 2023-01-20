@@ -11,6 +11,7 @@
         <include
             android:id="@+id/include"
             layout="@layout/appbar_back_header"
+            app:title="@{`영화`}"
             app:layout_constraintTop_toTopOf="parent" />
 
         <WebView
