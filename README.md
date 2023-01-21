@@ -4,6 +4,9 @@
 
 https://user-images.githubusercontent.com/15981307/213861527-25e643b0-2e1f-41cb-9884-c931cf28ef58.mov
 
+## Prototyping - Figma
+
+https://www.figma.com/file/076wV4fDXbj99PDuaPOELg/Flow%EA%B3%BC%EC%A0%9C?node-id=1%3A154&t=RCWuQT19TQVh2UXb-1
 
 ## 사용 기술스택
 
