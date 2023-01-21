@@ -2,7 +2,7 @@
 
 ## Preview
 
-https://user-images.githubusercontent.com/15981307/213863525-65712dc0-1655-4fe3-ad18-fd75abf77ad5.mov
+https://user-images.githubusercontent.com/15981307/213864231-d9b5af4d-332e-4af3-adc9-1cda576d450c.mov
 
 
 ## Prototyping - Figma
