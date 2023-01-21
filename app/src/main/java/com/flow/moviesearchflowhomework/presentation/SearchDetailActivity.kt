@@ -1,6 +1,5 @@
 package com.flow.moviesearchflowhomework.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
@@ -45,17 +44,6 @@ class SearchDetailActivity :
 
     private fun setListener() {
         binding.include.appbar.setNavigationOnClickListener {
-            Intent(this, MovieSearchActivity::class.java).apply {
-                startActivity(this)
-                finish()
-            }
-        }
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onBackPressed() {
-        Intent(this, MovieSearchActivity::class.java).apply {
-            startActivity(this)
             finish()
         }
     }
