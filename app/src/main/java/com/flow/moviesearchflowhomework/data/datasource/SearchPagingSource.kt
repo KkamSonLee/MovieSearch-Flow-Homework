@@ -34,11 +34,7 @@ class SearchPagingSource(
                 )
             }?.let { dto ->
                 total = dto.total
-                if (dto.total < 1 + (key - 1) * params.loadSize) {  //start index가 total count을 넘어도 total 범위까지 display 배수를 빼주어 계속 불러와지므로 처리
-                    listOf()
-                } else {
-                    mapper.map(dto)
-                }
+                mapper.map(dto)
             } ?: listOf()    // 해당 Case가 catchingApiCall에서 잡힌 Exception, 현재는 따로 처리할 것이 없으므로 빈 배열 반환
         return try {
             LoadResult.Page(
