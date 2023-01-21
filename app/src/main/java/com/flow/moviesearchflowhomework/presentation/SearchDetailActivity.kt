@@ -1,8 +1,8 @@
 package com.flow.moviesearchflowhomework.presentation
 
+import android.content.Intent
 import android.os.Bundle
 import android.webkit.WebChromeClient
-import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import com.flow.moviesearchflowhomework.databinding.ActivitySearchDetailBinding
 import com.flow.moviesearchflowhomework.presentation.util.BaseActivity
@@ -28,12 +28,34 @@ class SearchDetailActivity :
                 javaScriptEnabled = true
             }
             val link = intent.getStringExtra("link")
+            clearCache(true)
             link?.let { loadUrl(it) }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        with(binding.webview) {
+            clearHistory()
+            clearCache(true)
+            loadUrl("about:blank")
+            destroy()
         }
     }
 
     private fun setListener() {
         binding.include.appbar.setNavigationOnClickListener {
+            Intent(this, MovieSearchActivity::class.java).apply {
+                startActivity(this)
+                finish()
+            }
+        }
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onBackPressed() {
+        Intent(this, MovieSearchActivity::class.java).apply {
+            startActivity(this)
             finish()
         }
     }

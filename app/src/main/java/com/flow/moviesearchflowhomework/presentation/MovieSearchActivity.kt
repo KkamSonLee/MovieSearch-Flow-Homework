@@ -49,8 +49,10 @@ class MovieSearchActivity :
     private fun setAdapter() {
         searchAdapter = SearchListPagerAdapter { item ->     // Move to WebView
             Intent(this, SearchDetailActivity::class.java).apply {
+                searchViewModel.inputSearchText.value = ""
                 putExtra(LINK_NAME, item.link)
                 startActivity(this)
+                finish()
             }
         }
         binding.rvSearchList.adapter = searchAdapter

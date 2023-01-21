@@ -24,8 +24,8 @@
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".presentation.SearchDetailActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.MovieSearchActivity"
             android:exported="true"
