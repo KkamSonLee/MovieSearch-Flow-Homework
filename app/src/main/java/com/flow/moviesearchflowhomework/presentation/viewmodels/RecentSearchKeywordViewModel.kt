@@ -16,8 +16,8 @@ class RecentSearchKeywordViewModel @Inject constructor(private val homeRepositor
     ViewModel() {
 
     private val _recentSearchList =
-        MutableStateFlow<UiState<List<RecentSearchKeywordEntity>>>(UiState.Loading)  //시작과 동시에 로드하기 떄문에(init block) 로드를 초기값으로 setting
-    val recentSearchList get() = _recentSearchList.asStateFlow()   //Immutable StateFlow
+        MutableStateFlow<UiState<List<RecentSearchKeywordEntity>>>(UiState.Loading)  // 시작과 동시에 로드하기 떄문에(init block) 로드를 초기값으로 setting
+    val recentSearchList get() = _recentSearchList.asStateFlow()   // Immutable StateFlow
 
     init {
         viewModelScope.launch {

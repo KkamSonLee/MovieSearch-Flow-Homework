@@ -59,22 +59,22 @@ class RecentSearchKeywordActivity :
         recentSearchAdapter.submitList(recentSearchItem.data)
     }
 
-    private fun onLoad() {  //Progress visible
+    private fun onLoad() {  // Progress visible
         binding.pbProgress.setVisible()
     }
 
     private fun setAdapter() {
         recentSearchAdapter =
             RecentSearchListAdapter(
-                recentKeywordClickListener = { keywordEntity ->     //Move to SearchActivity
+                recentKeywordClickListener = { keywordEntity ->     // Move to SearchActivity
                     backToSearch(keywordEntity.keyword)
-                }, deleteKeywordClickListener = { keywordEntity ->  //delete 1 Item
+                }, deleteKeywordClickListener = { keywordEntity ->  // delete 1 Item
                     deleteKeyword(keywordEntity)
                 })
         binding.rvRecentList.adapter = recentSearchAdapter
     }
 
-    private fun backToSearch(keyword: String) {         //Return to getResultText(Search Activity)
+    private fun backToSearch(keyword: String) {         // Return to getResultText(Search Activity)
         val intent = Intent(this, MovieSearchActivity::class.java).apply {
             putExtra("searchKeyword", keyword)    //Search Keyword
         }
@@ -82,7 +82,7 @@ class RecentSearchKeywordActivity :
         finish()
     }
 
-    private fun deleteKeyword(keywordEntity: RecentSearchKeywordEntity) {  //remove call dao
+    private fun deleteKeyword(keywordEntity: RecentSearchKeywordEntity) {  // remove call dao
         recentSearchKeywordViewModel.deleteRecentKeyword(keywordEntity)
     }
 }

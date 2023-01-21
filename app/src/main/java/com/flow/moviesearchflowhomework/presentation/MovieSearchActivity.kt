@@ -26,7 +26,7 @@ class MovieSearchActivity :
     private lateinit var searchAdapter: SearchListPagerAdapter
     private val searchViewModel by viewModels<SearchViewModel>()
     private var job: Job? = null
-    private val getResultText: ActivityResultLauncher<Intent> =    //Get Activity Result
+    private val getResultText: ActivityResultLauncher<Intent> =    // Get Activity Result
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val data = result.data?.getStringExtra(SEARCH_KEYWORD).toString()
@@ -43,7 +43,7 @@ class MovieSearchActivity :
         setListener()
     }
 
-    private fun callSearch(keyword: String) {      //Progress, Collect Paging List
+    private fun callSearch(keyword: String) {      // Progress, Collect Paging List
         job = lifecycleScope.launch {
             searchViewModel.initSearchCollect(keyword).flowWithLifecycle(lifecycle)
                 .collectLatest { paging ->

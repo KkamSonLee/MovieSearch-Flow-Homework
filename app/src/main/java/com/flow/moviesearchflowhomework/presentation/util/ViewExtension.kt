@@ -1,4 +1,5 @@
 package com.flow.moviesearchflowhomework.presentation.util
+
 import android.view.View
 
 fun View.setVisible() {

@@ -33,7 +33,7 @@ class SearchListPagerAdapter(private val movieClickListener: (SearchItem) -> Uni
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val data = getItem(position)
-        if (data != null) {  //Paging Adapter 사용시 nullable로 바뀜
+        if (data != null) {  // Paging Adapter 사용시 nullable로 바뀜
             holder.binding.setVariable(BR.searchList, data)
             holder.binding.root.setOnClickListener {
                 movieClickListener(data)

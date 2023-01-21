@@ -1,13 +1,7 @@
 package com.flow.moviesearchflowhomework.data.local
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.flow.moviesearchflowhomework.domain.entity.RecentSearchKeywordEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SearchDAO {
