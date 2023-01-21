@@ -24,6 +24,8 @@ class MovieSearchActivity :
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == RESULT_OK) {
                 val data = result.data?.getStringExtra(SEARCH_KEYWORD).toString()
+                binding.lifecycleOwner = this
+                binding.searchViewModel = searchViewModel
                 searchViewModel.inputSearchText.value = data  //edit text
                 callSearch(data)
             }
