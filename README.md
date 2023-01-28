@@ -2,7 +2,8 @@
 
 ## Preview
 
-https://user-images.githubusercontent.com/15981307/213861527-25e643b0-2e1f-41cb-9884-c931cf28ef58.mov
+https://user-images.githubusercontent.com/15981307/213864231-d9b5af4d-332e-4af3-adc9-1cda576d450c.mov
+
 
 ## Prototyping - Figma
 
@@ -248,17 +249,28 @@ override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
 
 ```kotlin
 private fun callSearch(keyword: String) {      //Progress, Collect Paging List
-    collectFlowWhenStarted(searchViewModel.initSearchCollect(keyword)) { paging ->
-        searchAdapter.submitData(paging)
+    job = lifecycleScope.launch {
+        searchViewModel.initSearchCollect(keyword).flowWithLifecycle(lifecycle)
+            .collectLatest { paging ->
+                searchAdapter.submitData(paging)
+            }
     }
     collectFlowWhenStarted(searchAdapter.loadStateFlow) { state ->
         binding.pbProgress.isVisible = state.refresh is LoadState.Loading
     }
 }
 ```
-
+- 검색 리스트 collect 하는 코루틴 job에 보관
 - load 여부 어댑터의 loadStateFlow로 progress로 초기 상태만 처리하였음.
 - ViewModel상에서 initSearchCollect():Flow<PagingData<SearchItem>> Stream Collect → submitData()처리
+- onStop()에서 수집 정지(다음 검색어 입력으로 인한 새로운 수집이 이뤄질 수 있기 때문)
+
+```kotlin
+override fun onStop() {
+    super.onStop()
+    job?.cancel()
+}
+```
 
 ### null image Date 처리
 - image가 없는 데이터가 올 때가 있음
