@@ -1,16 +1,14 @@
 package com.flow.moviesearchflowhomework.presentation.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.flow.moviesearchflowhomework.domain.entity.RecentSearchKeywordEntity
-import com.flow.moviesearchflowhomework.domain.entity.SearchItem
 import com.flow.moviesearchflowhomework.domain.repository.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import javax.inject.Inject
@@ -20,7 +18,11 @@ class SearchViewModel @Inject constructor(private val homeRepository: HomeReposi
     ViewModel() {
     val inputSearchText = MutableStateFlow<String>("")
 
-    fun initSearchCollect(keyword: String): Flow<PagingData<SearchItem>> {
+    private val resultKeyword = MutableStateFlow("")
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val searchKeyword =
+        resultKeyword.flatMapLatest { homeRepository.fetchMovie(it) }.cachedIn(viewModelScope)
+    fun addSearchKeyword(keyword: String) {
         if (keyword.isNotBlank()) {
             viewModelScope.launch {
                 homeRepository.insertRecentSearch(
@@ -31,12 +33,6 @@ class SearchViewModel @Inject constructor(private val homeRepository: HomeReposi
                 )
             }
         }
-        return homeRepository.fetchMovie(keyword = keyword).cachedIn(viewModelScope)
+        resultKeyword.value = keyword
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.e("VIEWMODEL", "onCleared")
-    }
-
 }

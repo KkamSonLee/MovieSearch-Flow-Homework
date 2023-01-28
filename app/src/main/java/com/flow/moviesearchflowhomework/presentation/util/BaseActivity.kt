@@ -38,6 +38,7 @@ abstract class BaseActivity<T : ViewDataBinding>(private val inflate: (LayoutInf
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        binding.lifecycleOwner = this
         when (transitionMode) {
             TransitionMode.HORIZONTAL -> overridePendingTransition(
                 R.anim.horizontal_enter,  // 해당 액티비티를 상속하고 현재 들어오는 액티비티

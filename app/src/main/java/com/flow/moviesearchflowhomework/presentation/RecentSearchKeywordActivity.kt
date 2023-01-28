@@ -21,7 +21,6 @@ class RecentSearchKeywordActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.lifecycleOwner = this
         binding.recentViewModel = recentSearchKeywordViewModel
         setAdapter()
         setListener()

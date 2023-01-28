@@ -1,5 +1,6 @@
 package com.flow.moviesearchflowhomework.data.datasource
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.flow.moviesearchflowhomework.data.mapper.SearchItemMapper
@@ -11,8 +12,7 @@ class SearchPagingSource(
     private val naverService: NaverService,
     private val query: String,
     private val mapper: SearchItemMapper
-) :
-    PagingSource<Int, SearchItem>() {
+) : PagingSource<Int, SearchItem>() {
 
     override fun getRefreshKey(state: PagingState<Int, SearchItem>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -23,7 +23,6 @@ class SearchPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchItem> {
         val key = params.key ?: NAVER_STARTING_PAGE_INDEX
-
         var total = Int.MAX_VALUE
         val response =
             catchingApiCall {
